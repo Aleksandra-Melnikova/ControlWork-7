@@ -1,0 +1,32 @@
+.menu-item{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-item:hover{
+    box-shadow: 1px 1px 1px 1px gray;
+}
+
+.menu-image{
+    width: 50px;
+}
+
+.item-text{
+    flex-basis: 60%;
+}
+
+.menu-title{
+    font-size: 30px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.menu-price{
+    font-size: 24px;
+}
