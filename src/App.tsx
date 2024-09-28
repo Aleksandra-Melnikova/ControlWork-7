@@ -78,14 +78,13 @@ const App = () => {
     };
 
     const createArrayForDrawCheck= (items:IItem[]) => {
-    const arrayOfItems:IItem[] = [];
-    {items.map((item) =>{
-        if(item.count > 0){
+        const arrayOfItems:IItem[] = [];
+        {items.map((item) =>{
+            if(item.count > 0){
                 arrayOfItems.push(item);
-        }
-    });
-    }
-    return arrayOfItems;
+            }
+        });}
+        return arrayOfItems;
     };
 
     let itemList = null;
