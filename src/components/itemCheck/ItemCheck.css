@@ -1,19 +1,15 @@
 .item-check{
     display: grid;
-    grid-template-columns: 40% 10% 1fr 10%;
-    gap: 5px
+    grid-template-columns: 40% 20% 1fr 5%;
+    gap: 5px;
+    align-items: center;
+
 }
 
-.item-check-title{
-    font-size:24px ;
-}
-
-.item-check-count{
-    font-size:24px ;
-}
-
-.item-check-cost{
-    font-size:24px ;
+.item-check span{
+    font-size:22px;
+    text-align: left;
+    margin-top: 10px;
 }
 
 .delete-btn{
@@ -22,9 +18,10 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border: none;
+    margin-top: 10px;
 }
 
 .delete-btn:hover{

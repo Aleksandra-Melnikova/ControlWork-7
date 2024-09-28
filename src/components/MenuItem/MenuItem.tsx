@@ -5,11 +5,12 @@ interface MenuItemProps {
     image:string;
     title:string;
     price:number;
+    onClickAdd:()=>void;
 }
 
-const MenuItem:React.FC<MenuItemProps> = ({image, title, price}) => {
+const MenuItem:React.FC<MenuItemProps> = ({image, title, price, onClickAdd}) => {
     return (
-        <button type='button' className='menu-item'>
+        <button onClick={onClickAdd} type='button' className='menu-item'>
             <img className='menu-image' src={image} alt={title}/>
             <div className='item-text'>
                 <h3 className='menu-title'>{title}</h3>
