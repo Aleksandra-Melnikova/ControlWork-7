@@ -26,12 +26,6 @@
   font-size: 30px;
 }
 
-.menu-items{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
 .block-title{
   font-size: 34px;
   text-align: left;

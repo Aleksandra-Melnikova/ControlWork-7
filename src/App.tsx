@@ -1,17 +1,12 @@
 import './App.css';
-import MenuItem from "./components/MenuItem/MenuItem.tsx";
 import food from './assets/food.png';
 import drink from './assets/drink.png';
-import {useState} from "react";
-import ItemCheck from "./components/itemCheck/itemCheck.tsx";
-import TotalPrice from "./components/TotalPrice/TotalPrice.tsx";
+import {useState} from 'react';
+import ItemCheck from './components/itemCheck/itemCheck.tsx';
+import TotalPrice from './components/TotalPrice/TotalPrice.tsx';
+import {MenuItemType} from './types';
+import MenuItems from './components/MenuItems/MenuItems.tsx';
 
-
-type MenuItemType = {
-    title: string;
-    price: number;
-    image: string;
-}
 
 interface IItem {
     title: string;
@@ -30,29 +25,31 @@ const App = () => {
     ];
 
     const [items, setItems] = useState<IItem[]>([
-        {title: 'Hamburger', price: 80, count: 0},
-        {title: 'Coffee', price: 70, count: 0},
-        {title: 'Cheeseburger', price: 90, count: 0},
-        {title: 'Tea', price: 50, count: 0},
-        {title: 'Fries', price: 45, count: 0},
-        {title: 'Cola', price: 40, count: 0},
+        {title: 'Hamburger', price: 0, count: 0},
+        {title: 'Coffee', price: 0, count: 0},
+        {title: 'Cheeseburger', price: 0, count: 0},
+        {title: 'Tea', price: 0, count: 0},
+        {title: 'Fries', price: 0, count: 0},
+        {title: 'Cola', price: 0, count: 0},
     ]);
 
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
     const AddMenuItem = (itemName:string) =>{
+        const index = MenuElements.findIndex(task => task.title === itemName);
         const copyItems = items.map(item => {
             if (item.title === itemName) {
                 return {
                     ...item,
                     count: item.count + 1,
+                    price:item.price + MenuElements[index].price,
                 };
             }
             return {...item};
         });
         const priceToState = items.reduce((acc,item) => {
             if(item.title === itemName){
-                acc+= item.price;}
+                acc+= MenuElements[index].price;}
             return acc;
         },totalPrice);
         setTotalPrice(priceToState);
@@ -60,23 +57,25 @@ const App = () => {
     };
 
     const deleteItem = (itemName:string) =>{
+        const index = MenuElements.findIndex(task => task.title === itemName);
         const copyItems = items.map(item => {
             if (item.title === itemName) {
                 return {
                     ...item,
                     count: item.count - 1,
+                    price: item.price - MenuElements[index].price,
                 };
             }
             return {...item};
         });
         const priceToState = items.reduce((acc,item) => {
             if(item.title === itemName){
-                acc-= item.price;}
+                acc-= MenuElements[index].price;}
             return acc;
         },totalPrice);
         setTotalPrice(priceToState);
         setItems(copyItems);
-    }
+    };
 
     const createArrayForDrawCheck= (items:IItem[]) => {
     const arrayOfItems:IItem[] = [];
@@ -87,21 +86,19 @@ const App = () => {
     });
     }
     return arrayOfItems;
-};
+    };
 
     let itemList = null;
 
-if (createArrayForDrawCheck(items).length !== 0) {
-    itemList = createArrayForDrawCheck(items).map(item =>{
-        return (<ItemCheck
-            key={item.title+item.count}
-            title={item.title}
-            count={item.count}
-            cost={item.price * item.count}
-            onDeleteItem={() => deleteItem(item.title)}
-        />);
-    });
-}
+    if (createArrayForDrawCheck(items).length !== 0) {
+        itemList = createArrayForDrawCheck(items).map(item =>{
+            return (<ItemCheck
+                key={item.title+item.count}
+                title={item.title}
+                count={item.count}
+                cost={item.price}
+                onDeleteItem={() => deleteItem(item.title)}/>);});
+    }
 
     return (
         <div className="App">
@@ -113,18 +110,10 @@ if (createArrayForDrawCheck(items).length !== 0) {
             </div>
             <div className='block'>
             <h2 className='block-title'>Add items:</h2>
-                <div className='menu-items'>
-                    {MenuElements.map((element) =>
-                        <MenuItem
-                            key={element.title}
-                            onClickAdd={()=>AddMenuItem(element.title)}
-                            title={element.title}
-                            image={element.image}
-                            price={element.price}/>)}
-                </div>
+              <MenuItems ElementsArray={MenuElements} AddMenuItem={AddMenuItem}/>
             </div>
         </div>
     );
-}
+};
 
-export default App
+export default App;
