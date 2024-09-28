@@ -56,6 +56,19 @@ const App = () => {
         setItems(copyItems);
     };
 
+    const deleteItem = (ItemName:string) =>{
+        const copyItems = items.map(item => {
+            if (item.title === ItemName) {
+                return {
+                    ...item,
+                    count: item.count - 1,
+                };
+            }
+            return {...item};
+        });
+        setItems(copyItems);
+    }
+
     const createArrayForDrawCheck= (items:IItem[]) => {
     const arrayOfItems:IItem[] = [];
     {items.map((item) =>{
@@ -75,7 +88,9 @@ if (createArrayForDrawCheck(items).length !== 0) {
             key={item.title+item.count}
             title={item.title}
             count={item.count}
-            cost={item.price * item.count}/>);
+            cost={item.price * item.count}
+            onDeleteItem={() => deleteItem(item.title)}
+        />);
     });
 }
 
