@@ -1,0 +1,32 @@
+.item-check{
+    display: grid;
+    grid-template-columns: 40% 10% 1fr 10%;
+    gap: 5px
+}
+
+.item-check-title{
+    font-size:24px ;
+}
+
+.item-check-count{
+    font-size:24px ;
+}
+
+.item-check-cost{
+    font-size:24px ;
+}
+
+.delete-btn{
+    background-image: url("../../assets/delete.png");
+    background-size:cover;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.delete-btn:hover{
+    box-shadow: 1px 1px 1px 1px gray;
+}

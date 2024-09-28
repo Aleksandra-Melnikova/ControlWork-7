@@ -21,9 +21,14 @@ const App = () => {
 
     ];
     return (
-        <>
-            <div className='right-block'>
-                <h2 className='add-items-title'>Add items</h2>
+        <div className="App">
+            <div className='block'>
+                <h2 className='block-title'>Order details:</h2>
+                <p className='left-block-text'>Order is empty!<br/>Please add some items!</p>
+
+            </div>
+            <div className='block'>
+                <h2 className='block-title'>Add items:</h2>
                 <div className='menu-items'>
                     {MenuElements.map((element) =>
                         <MenuItem
@@ -33,7 +38,7 @@ const App = () => {
                             price={element.price}/>)}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

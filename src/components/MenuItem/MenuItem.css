@@ -19,6 +19,8 @@
 
 .item-text{
     flex-basis: 60%;
+    text-align: left;
+    margin-left: 20px;
 }
 
 .menu-title{
