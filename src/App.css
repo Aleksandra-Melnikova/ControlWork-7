@@ -17,6 +17,10 @@
   border-radius: 20px
 }
 
+.order-bottom{
+  margin-top: 30px;
+}
+
 .left-block-text{
   text-align: left;
   font-size: 30px;

@@ -4,6 +4,7 @@ import food from './assets/food.png';
 import drink from './assets/drink.png';
 import {useState} from "react";
 import ItemCheck from "./components/itemCheck/itemCheck.tsx";
+import TotalPrice from "./components/TotalPrice/TotalPrice.tsx";
 
 
 type MenuItemType = {
@@ -37,9 +38,11 @@ const App = () => {
         {title: 'Cola', price: 40, count: 0},
     ]);
 
-    const AddMenuItem = (ItemName:string) =>{
+    const [totalPrice, setTotalPrice] = useState<number>(0);
+
+    const AddMenuItem = (itemName:string) =>{
         const copyItems = items.map(item => {
-            if (item.title === ItemName) {
+            if (item.title === itemName) {
                 return {
                     ...item,
                     count: item.count + 1,
@@ -47,18 +50,18 @@ const App = () => {
             }
             return {...item};
         });
-        // const priceToState = ingredientsItem.reduce((acc,item) => {
-        //     if(item.title === ingredientName){
-        //         acc+= item.cost;}
-        //     return acc;
-        // },price);
-        // setPrice(priceToState);
+        const priceToState = items.reduce((acc,item) => {
+            if(item.title === itemName){
+                acc+= item.price;}
+            return acc;
+        },totalPrice);
+        setTotalPrice(priceToState);
         setItems(copyItems);
     };
 
-    const deleteItem = (ItemName:string) =>{
+    const deleteItem = (itemName:string) =>{
         const copyItems = items.map(item => {
-            if (item.title === ItemName) {
+            if (item.title === itemName) {
                 return {
                     ...item,
                     count: item.count - 1,
@@ -66,6 +69,12 @@ const App = () => {
             }
             return {...item};
         });
+        const priceToState = items.reduce((acc,item) => {
+            if(item.title === itemName){
+                acc-= item.price;}
+            return acc;
+        },totalPrice);
+        setTotalPrice(priceToState);
         setItems(copyItems);
     }
 
@@ -100,6 +109,7 @@ if (createArrayForDrawCheck(items).length !== 0) {
                 <h2 className='block-title'>Order details:</h2>
                 {itemList === null ? <p className='left-block-text'>Order is empty!<br/>Please add some items!</p>:
                 itemList}
+                {itemList !== null ? <div className='order-bottom'><hr/><TotalPrice totalPrice={totalPrice}/></div>:null}
             </div>
             <div className='block'>
             <h2 className='block-title'>Add items:</h2>

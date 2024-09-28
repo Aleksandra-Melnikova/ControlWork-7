@@ -1,0 +1,8 @@
+.total-price {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+}
